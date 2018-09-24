@@ -27,7 +27,5 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function friendList(){
-        return $this->belongsTo('App\Friend','')
-    }
+   
 }
