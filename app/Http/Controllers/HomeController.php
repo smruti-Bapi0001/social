@@ -45,4 +45,22 @@ class HomeController extends Controller
            'users' => $users
         ]);
     }
+
+    public function addFriend(Request $request){
+        if(isset($request->id)){
+            $user = User::whereId($request->user)->first();
+            Friend::create([
+                'from_id' => $user->id,
+                'to_id' => $request->id,
+                'status' => 3
+            ]);
+
+            return response()->json([
+                'status' => 'success'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error'
+        ],500);
+    }
 }

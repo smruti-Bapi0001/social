@@ -16,7 +16,10 @@
                                         <label>
                                             {{$user->name}}
                                         </label>
-                                        <button class="btn btn-primary pull-right">
+                                        <?php 
+                                            $checkStatus = GetStatus($user->id);
+                                        ?>
+                                        <button class="btn btn-primary pull-right add-friend" data-id="{{$user->id}}">
                                             Add Friend
                                         </button>
                                     </div>
@@ -25,13 +28,35 @@
                         @else
 
                         @endif
-
+                        {{ csrf_field()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<script type="text/javascript">
 
+    $(document).ready(function(){
+        var user = "{{Auth::user()->id}}";
+        $('.add-friend').on('click', function(){
+            var id = $(this).data('id');
+            
+            $.ajax({
+                url : "{{url('/api/addFriend')}}",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type : 'post',
+                data : {'id' : id, 'user' : user},
+                success : function(response){
+                    $(this).text('Request Sent');
+                },
+                error : function(){
+
+                }
+            });
+        });
+    });
+    
+</script>
 
 
 @endsection
