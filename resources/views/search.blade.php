@@ -17,7 +17,7 @@
                                             {{$user->name}}
                                         </label>
                                         <?php 
-                                            $checkStatus = GetStatus($user->id);
+                                            //$checkStatus = GetStatus($user->id);
                                         ?>
                                         <button class="btn btn-primary pull-right add-friend" data-id="{{$user->id}}">
                                             Add Friend
